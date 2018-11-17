@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    <title>GMD System - New Product</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <form id="supplierRegForm" method="post" action="/gmd/products/new" th:object="${product}">
+            <fieldset>
+                <legend>New Product Form</legend>
+                <input type="hidden" name="productId" th:value="${product.productId}" />
+
+                <div class="form-group">
+                    <label for="productNumber">Product Number</label>
+                    <span th:if="${#fields.hasErrors('productNumber')}" th:errors="*{product.productNumber}"
+									class="alert alert-danger"></span>
+                    <input id="productNumber" name="productNumber" type="text" class="form-control" th:value="${product.productNumber}">
+                </div>
+
+                <div class="form-group">
+                        <label for="name">Name</label>
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                            class="alert alert-danger"></span>
+                        <input id="name" name="name" type="text" class="form-control" th:value="${product.name}">
+                </div>
+
+                <div class="form-group">
+                    <label for="unitPrice">Unit Price</label>
+                    <span th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"
+                          class="alert alert-danger"></span>
+                    <input id="unitPrice" name="unitPrice" type="text" class="form-control" th:value="${product.unitPrice}">
+                </div>
+
+                <div class="form-group">
+                    <label for="quantityInStock">Quantity In Stock</label>
+                    <span th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"
+                          class="alert alert-danger"></span>
+                    <input id="quantityInStock" name="quantityInStock" type="text" class="form-control" th:value="${product.quantityInStock}">
+                </div>
+
+                <div class="form-group">
+                    <label for="dateSupplied">Date Supplied</label>
+                    <span th:if="${#fields.hasErrors('dateSupplied')}" th:errors="*{dateSupplied}"
+                          class="alert alert-danger"></span>
+                    <input id="dateSupplied" name="dateSupplied" type="date" class="form-control" th:value="${product.dateSupplied}">
+                </div>
+                <div class="form-group">
+                        <select class="form-control" id="supplierId" name="supplier">
+                            <option value="">Select Supplier</option>
+                            <option th:each="supplier : ${suppliers}"
+                                    th:value="${supplier.supplierId}"
+                                    th:text="${supplier.name}"></option>
+                        </select>
+                </div>
+
+
+                <div style="float:right;">
+                    <a href="/gmd/products/browse" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-success">Create Product</button>
+                </div>
+            </fieldset>
+        </form>
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+    
+</body>
+</html>

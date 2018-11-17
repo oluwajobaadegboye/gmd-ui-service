@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    <title>GMD System - New Supplier</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <form id="supplierRegForm" method="post" action="/gmd/supplier/edit" th:object="${supplier}">
+        <fieldset>
+            <legend>New Supplier Form</legend>
+            <input type="hidden" name="supplierId" th:value="${supplier.supplierId}" />
+            <div class="form-group">
+                <label for="supplierNumber">Supplier Number</label>
+                <span th:if="${#fields.hasErrors('supplierNumber')}" th:errors="*{supplierNumber}"
+                      class="alert alert-danger"></span>
+                <input id="supplierNumber" name="supplierNumber" type="text" class="form-control" th:value="${supplier.supplierNumber}">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                      class="alert alert-danger"></span>
+                <input id="name" name="name" type="text" class="form-control" th:value="${supplier.name}">
+            </div>
+
+            <div class="form-group">
+                <label for="contactPhoneNumber">Contact Phone Number</label>
+                <span th:if="${#fields.hasErrors('contactPhoneNumber')}" th:errors="*{contactPhoneNumber}"
+                      class="alert alert-danger"></span>
+                <input id="contactPhoneNumber" name="contactPhoneNumber" type="text" class="form-control" th:value="${supplier.contactPhoneNumber}">
+            </div>
+
+            <div style="float:right;">
+                <a href="/gmd/supplier/browse" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Create Supplier</button>
+            </div>
+        </fieldset>
+    </form>
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

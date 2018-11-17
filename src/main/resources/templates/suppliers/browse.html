@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    <title>GMD System - Browse List of Suppliers</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <div>
+            <span style="font-size: 1.5em">List of List of Suppliers</span>
+            <span style="float:right;">
+                <a class="btn btn-outline-success btn-lg" href="/gmd/suppliers/new">Create Supplier</a>
+            </span>
+        </div>
+        <p>&nbsp;</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Supplier Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Contact Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="supplier,iterStat : ${suppliers}" th:onclick="@{document.location='/gmd/suppliers/edit/{sId}'(sId=${supplier.supplierId})}">
+                    <th scope="row" th:text="${iterStat.count}"></th>
+                    <td th:text="${supplier.supplierNumber}"></td>
+                    <td th:text="${supplier.name}"></td>
+                    <td th:text="${supplier.contactPhoneNumber}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+    
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    <title>GMD Store</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <h3>Welcome to Golden Dome Market (GDM) system - featuring:</h3>
+        <ul>
+            <li>Ability to create suppliers</li>
+            <li>Ability to view all suppliers</li>
+            <li>Ability to create products</li>
+            <li>Ability to view all products</li>
+        </ul>
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+    
+</body>
+</html>
