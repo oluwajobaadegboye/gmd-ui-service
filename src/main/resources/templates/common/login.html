@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    <title>Inventory Manager - New Merchant</title>
+</head>
+<body>
+<div class="error" th:if="${param.error}"
+     th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+    Reason: <span th:text="${errorMsg}">Wrong input!</span>
+</div>
+  <!-- /login?error=true -->
+      <div th:if="${errors}">
+          Wrong Username or Password
+      </div>
+      <div th:if="${#request.getParameter('error') == 'true'}"
+                       style="color:red;margin:10px 0px;">
+             Login Failed!!!<br />
+             Reason :
+             <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+                               th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+                
+          </div>
+<th:block layout:fragment="content">
+    <form id="myForm" method="post" th:action="@{/j_spring_security_check}" th:object="${login}">
+        <fieldset>
+            <legend>Login Form</legend>
+
+            <div class="form-group">
+                <label for="username">UserName</label>
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                      class="alert alert-danger"></span>
+                <input id="username" name="username" type="text" class="form-control" th:value="${login.username}">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                      class="alert alert-danger"></span>
+                <input id="password" name="password" type="password" class="form-control" th:value="${login.password}">
+            </div>
+
+            <div class="form-group">
+                <label>Remember Me?</label>
+                <input type="checkbox" name="remember-me" />
+                <!--<input id="password" name="password" type="password" class="form-control" th:value="${login.password}">-->
+            </div>
+
+
+            <div style="float:right;">
+                  <button id="btnSubmit" type="submit" class="btn btn-primary">Login</button>&nbsp;&nbsp;&nbsp;
+                <a href="/inventory-manager/merchants/new">Create Account</a>
+            </div>
+        </fieldset>
+    </form>
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>
